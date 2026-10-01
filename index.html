@@ -1,1 +1,682 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>NATURESCAPE — Explore the Beauty of Nature</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Arial", sans-serif;
+      background: #f4f1e8;
+      color: #26352b;
+      line-height: 1.7;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(244, 241, 232, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #d8d2c2;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #315c45;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #34443a;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #6b8e70;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      background:
+        linear-gradient(rgba(24, 48, 34, 0.55), rgba(24, 48, 34, 0.55)),
+        url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=80")
+        center/cover;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(50px, 8vw, 90px);
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.95;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 28px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+
+    .hero-btn:hover {
+      background: white;
+      color: #315c45;
+    }
+
+    /* GENERAL */
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 50px;
+    }
+
+    .section-title h2 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      color: #315c45;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #657267;
+    }
+
+    /* ARTICLE GRID */
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fffdf7;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #ddd8c9;
+      transition: 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(45, 69, 52, 0.13);
+    }
+
+    .card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .label {
+      display: inline-block;
+      background: #dfe9dc;
+      color: #315c45;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #2c4937;
+    }
+
+    .card p {
+      color: #687269;
+      margin-bottom: 15px;
+    }
+
+    .read-more {
+      border: none;
+      background: none;
+      color: #4d7658;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    .extra {
+      display: none;
+      margin-top: 12px;
+      color: #687269;
+    }
+
+    /* ABOUT */
+    .about {
+      background: #dfe8dc;
+    }
+
+    .about-content {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .about-content h2 {
+      font-family: Georgia, serif;
+      font-size: 40px;
+      color: #315c45;
+      margin-bottom: 15px;
+    }
+
+    /* TIPS */
+    .tips {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .tip {
+      background: #fffdf7;
+      padding: 25px 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid #ddd8c9;
+    }
+
+    .tip span {
+      font-size: 35px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .tip h3 {
+      margin-bottom: 8px;
+      color: #315c45;
+    }
+
+    .tip p {
+      font-size: 14px;
+      color: #687269;
+    }
+
+    /* COMMENTS */
+    .comments {
+      max-width: 900px;
+      margin: auto;
+      background: #fffdf7;
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid #ddd8c9;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #263d2e;
+      color: #e9eee8;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    footer h3 {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      nav {
+        padding: 15px 5%;
+      }
+
+      nav ul {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .articles {
+        grid-template-columns: 1fr;
+      }
+
+      .tips {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      section {
+        padding: 60px 5%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero {
+        min-height: 70vh;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      nav .logo {
+        font-size: 16px;
+      }
+
+      nav ul {
+        gap: 8px;
+      }
+
+      nav a {
+        font-size: 10px;
+      }
+
+      .tips {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title h2 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">NATURESCAPE</div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#comments">Comments</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <h1>NATURESCAPE</h1>
+
+      <p>
+        Explore the beauty, mystery, and wonder of nature
+        through the sea, wetlands, forests, and caves.
+      </p>
+
+      <a href="#explore" class="hero-btn">
+        Explore Nature
+      </a>
+    </div>
+  </header>
+
+
+  <!-- ARTICLES -->
+  <section id="explore">
+
+    <div class="section-title">
+      <h2>Explore the Wild</h2>
+      <p>
+        Setiap sudut alam memiliki cerita dan keindahan
+        yang berbeda untuk kita kenali.
+      </p>
+    </div>
+
+
+    <div class="articles">
+
+      <!-- LAUT -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
+          alt="Laut">
+
+        <div class="card-content">
+
+          <span class="label">Ocean</span>
+
+          <h3>Laut</h3>
+
+          <p>
+            Laut merupakan salah satu ekosistem terbesar
+            di bumi yang menyimpan kehidupan luar biasa.
+          </p>
+
+          <button class="read-more"
+            onclick="toggleText('laut', this)">
+            Baca selengkapnya →
+          </button>
+
+          <div class="extra" id="laut">
+            Laut menjadi habitat bagi berbagai makhluk hidup,
+            mulai dari ikan, terumbu karang, hingga mamalia laut.
+            Selain menjadi sumber kehidupan, laut juga berperan
+            penting dalam menjaga keseimbangan iklim bumi.
+          </div>
+
+        </div>
+      </article>
+
+
+      <!-- RAWA -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=1000&q=80"
+          alt="Rawa">
+
+        <div class="card-content">
+
+          <span class="label">Wetland</span>
+
+          <h3>Rawa</h3>
+
+          <p>
+            Rawa adalah wilayah yang selalu atau secara berkala
+            digenangi air dan memiliki ekosistem yang unik.
+          </p>
+
+          <button class="read-more"
+            onclick="toggleText('rawa', this)">
+            Baca selengkapnya →
+          </button>
+
+          <div class="extra" id="rawa">
+            Ekosistem rawa membantu menyimpan air,
+            mengurangi risiko banjir, dan menjadi tempat hidup
+            berbagai jenis tumbuhan serta satwa. Rawa juga
+            memiliki peran penting dalam menjaga kualitas air.
+          </div>
+
+        </div>
+      </article>
+
+
+      <!-- HUTAN -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80"
+          alt="Hutan">
+
+        <div class="card-content">
+
+          <span class="label">Forest</span>
+
+          <h3>Hutan</h3>
+
+          <p>
+            Hutan merupakan rumah bagi berbagai jenis
+            tumbuhan dan hewan sekaligus penjaga keseimbangan alam.
+          </p>
+
+          <button class="read-more"
+            onclick="toggleText('hutan', this)">
+            Baca selengkapnya →
+          </button>
+
+          <div class="extra" id="hutan">
+            Hutan membantu menghasilkan oksigen, menyerap karbon,
+            menjaga tanah, dan mengatur siklus air. Keanekaragaman
+            hayati di dalamnya membuat hutan menjadi salah satu
+            ekosistem paling penting di dunia.
+          </div>
+
+        </div>
+      </article>
+
+
+      <!-- GOA -->
+      <article class="card">
+
+        <img
+          src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=80"
+          alt="Goa">
+
+        <div class="card-content">
+
+          <span class="label">Cave</span>
+
+          <h3>Goa</h3>
+
+          <p>
+            Goa menyimpan keindahan alam yang terbentuk
+            melalui proses geologi selama waktu yang sangat panjang.
+          </p>
+
+          <button class="read-more"
+            onclick="toggleText('goa', this)">
+            Baca selengkapnya →
+          </button>
+
+          <div class="extra" id="goa">
+            Goa dapat memiliki stalaktit dan stalagmit yang terbentuk
+            secara perlahan dari mineral. Selain menarik untuk
+            dipelajari, beberapa goa juga menjadi habitat bagi
+            kelelawar dan organisme lainnya.
+          </div>
+
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+
+    <div class="about-content">
+
+      <h2>About Naturescape</h2>
+
+      <p>
+        Naturescape adalah blog sederhana yang mengajak pembaca
+        mengenal berbagai bentuk keindahan alam. Mulai dari
+        luasnya laut, ekosistem rawa, hijaunya hutan, hingga
+        misteri yang tersimpan di dalam goa.
+      </p>
+
+      <br>
+
+      <p>
+        Melalui informasi sederhana, kita dapat lebih memahami
+        pentingnya menjaga alam agar tetap lestari bagi generasi
+        sekarang dan generasi yang akan datang.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- TIPS -->
+  <section>
+
+    <div class="section-title">
+
+      <h2>Love Our Planet</h2>
+
+      <p>
+        Hal kecil yang bisa kita lakukan untuk menjaga alam.
+      </p>
+
+    </div>
+
+
+    <div class="tips">
+
+      <div class="tip">
+        <span>🌱</span>
+        <h3>Tanam Pohon</h3>
+        <p>
+          Menanam dan merawat pohon membantu menjaga lingkungan.
+        </p>
+      </div>
+
+      <div class="tip">
+        <span>♻️</span>
+        <h3>Kurangi Sampah</h3>
+        <p>
+          Kurangi penggunaan barang sekali pakai dan pilah sampah.
+        </p>
+      </div>
+
+      <div class="tip">
+        <span>💧</span>
+        <h3>Hemat Air</h3>
+        <p>
+          Gunakan air seperlunya dan hindari pemborosan.
+        </p>
+      </div>
+
+      <div class="tip">
+        <span>🌏</span>
+        <h3>Jaga Alam</h3>
+        <p>
+          Jangan merusak habitat dan selalu tinggalkan alam tetap bersih.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMMENTS -->
+  <section id="comments">
+
+    <div class="section-title">
+
+      <h2>Comments</h2>
+
+      <p>
+        Share your thoughts and experience about nature.
+      </p>
+
+    </div>
+
+
+    <div class="comments">
+
+      <script
+        src="https://utteranc.es/client.js"
+        repo="sasikiranarzky/ruang-edukasi-"
+        issue-term="pathname"
+        label="blog-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <h3>NATURESCAPE</h3>
+
+    <p>
+      Explore • Appreciate • Protect
+    </p>
+
+    <p>
+      © 2026 Naturescape. Created for educational purposes.
+    </p>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    function toggleText(id, button) {
+
+      const text = document.getElementById(id);
+
+      if (text.style.display === "block") {
+
+        text.style.display = "none";
+        button.innerHTML = "Baca selengkapnya →";
+
+      } else {
+
+        text.style.display = "block";
+        button.innerHTML = "Tutup ↑";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
